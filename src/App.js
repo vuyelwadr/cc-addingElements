@@ -1,23 +1,45 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
+export const initialValues = ["a", "b", "c", "d", "e", "f"];
+export const initialValue = "X"
+
 function App() {
+  const [values, setValues] = useState(initialValues);
+
+  function handleSpaceClick(item, index) {
+    // Modify the values array (insert 'X' after the clicked item)
+    const updatedValues = [...values];
+    updatedValues.splice(index + 1, 0, initialValue);
+    // Update the state to trigger re-render
+    setValues(updatedValues);
+  }
+
+  function handleValueChange(value, index) {
+    const updatedValues = [...values];
+    updatedValues.splice(index, 1, value);
+    setValues(updatedValues);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='elementList'>
+        {values.map((value, index) => (
+          <React.Fragment key={index}>
+            <input
+              id={`inputValue${index}`}
+              className='elements'
+              onChange={(event) => handleValueChange(event.target.value, index)}
+              value={value}
+            />
+            <div
+              id={`clickableItem${index}`}
+              className="clickableItem"
+              onClick={() => handleSpaceClick(value, index)}
+            ></div>
+          </React.Fragment>
+        ))}
+      </div>
     </div>
   );
 }

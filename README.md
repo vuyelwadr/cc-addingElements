@@ -1,3 +1,8 @@
+# About The App
+
+Code challenge to add new elements when the space between existing elements is clicked. 
+Exisiting elements value should also be modifyable
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
